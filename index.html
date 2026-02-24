@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-surface="void">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
@@ -18,6 +18,11 @@
     </div>
 
     <div class="actions">
+      <button class="btn btn-ghost toggle" id="btn-surface" type="button" aria-label="Toggle surface">
+        <span class="toggle-dot" aria-hidden="true"></span>
+        <span class="toggle-txt" id="surface-label">Void</span>
+      </button>
+
       <button class="btn" id="btn-export" type="button">Export</button>
       <label class="btn btn-ghost" for="import-file" role="button">Import</label>
       <input id="import-file" type="file" accept="application/json" />
@@ -70,18 +75,83 @@
       </div>
 
       <div class="body">
+        <div class="summary" aria-label="Subscription summary">
+          <div class="chip">
+            <span class="chip-k">Monthly total</span>
+            <span class="chip-v" id="sub-monthly">$0.00</span>
+          </div>
+          <div class="chip">
+            <span class="chip-k">Due soon</span>
+            <span class="chip-v" id="sub-soon">0</span>
+          </div>
+        </div>
+
         <form class="form subform" id="sub-form">
           <input class="input" id="sub-name" type="text" placeholder="Name" maxlength="60" required />
           <input class="input" id="sub-amount" type="text" placeholder="Amount (optional)" maxlength="16" inputmode="decimal" />
+
           <select class="input select" id="sub-cycle" aria-label="Billing cycle">
             <option value="monthly">Monthly</option>
             <option value="yearly">Yearly</option>
           </select>
+
+          <select class="input select" id="sub-advance" aria-label="Renewal rule">
+            <option value="fixed">Fixed</option>
+            <option value="rolling">Rolling</option>
+            <option value="interval">Interval</option>
+          </select>
+
+          <input class="input" id="sub-interval" type="text" inputmode="numeric" maxlength="4" placeholder="Days" aria-label="Interval days" />
+
           <input class="input" id="sub-date" type="date" required />
+
           <button class="btn btn-glow" type="submit">Add</button>
         </form>
 
         <div class="list" id="sub-list" role="list"></div>
+      </div>
+    </section>
+
+    <!-- CALCULATOR -->
+    <section class="panel calc" aria-label="Calculator">
+      <div class="head">
+        <div class="kicker">Calculator</div>
+        <div class="mini">
+          <button class="mini-btn" id="calc-copy" type="button">Copy</button>
+        </div>
+      </div>
+
+      <div class="body">
+        <div class="calc-disp" aria-label="Calculator display">
+          <div class="calc-expr" id="calc-expr"></div>
+          <div class="calc-res" id="calc-res">0</div>
+        </div>
+
+        <div class="calc-grid" role="group" aria-label="Calculator keys">
+          <button class="ck ck-w" data-k="C" type="button">C</button>
+          <button class="ck" data-k="PM" type="button">±</button>
+          <button class="ck" data-k="%" type="button">%</button>
+          <button class="ck ck-op" data-k="÷" type="button">÷</button>
+
+          <button class="ck" data-k="7" type="button">7</button>
+          <button class="ck" data-k="8" type="button">8</button>
+          <button class="ck" data-k="9" type="button">9</button>
+          <button class="ck ck-op" data-k="×" type="button">×</button>
+
+          <button class="ck" data-k="4" type="button">4</button>
+          <button class="ck" data-k="5" type="button">5</button>
+          <button class="ck" data-k="6" type="button">6</button>
+          <button class="ck ck-op" data-k="−" type="button">−</button>
+
+          <button class="ck" data-k="1" type="button">1</button>
+          <button class="ck" data-k="2" type="button">2</button>
+          <button class="ck" data-k="3" type="button">3</button>
+          <button class="ck ck-op" data-k="+" type="button">+</button>
+
+          <button class="ck ck-wide" data-k="0" type="button">0</button>
+          <button class="ck" data-k="." type="button">.</button>
+          <button class="ck ck-eq" data-k="=" type="button">=</button>
+        </div>
       </div>
     </section>
   </main>
